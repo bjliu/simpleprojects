@@ -6,8 +6,16 @@
 
 from math import *
 from Queue import *
-import operator
-import re
+import operator, re, select, sys
+
+#Input only contains 4 standard algebraic operators (+, - , x, /) as well as parentheses.
+#I expect that input will be well-formed (e.g. all open parentheses will have matching
+#closed parentheses) and that operators will always be between numbers or expressions
+#in parentheses ((-3) and (2+) are invalid but (2) is valid.
+#
+#Program is called locally on command line with "python calculator.py"
+#
+#A null input ends the program.
 
 
 ARITHMETIC_OPERATORS = {'+':  operator.add, '-':  operator.sub, '*':  operator.mul, '/':  operator.div}
@@ -64,5 +72,12 @@ def calc_eval(infix):
     return stack.pop()
 
 #Allow user to input string through command line, which will be my method of input"
-infix = raw_input("Enter the infix notation : ")
-print "Output: " + str(calc_eval(infix))
+while True:
+    """r,w,e = select.select([sys.stdin], [], [], 600)
+    if sys.stdin in r: # data available on sys.stdin
+        if sys.stdin.read() == 'q':
+            break"""
+    infix = raw_input("Enter the infix notation : ")
+    if infix == '':
+        break
+    print "Output: " + str(calc_eval(infix))
