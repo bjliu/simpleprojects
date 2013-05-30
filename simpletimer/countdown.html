@@ -1,114 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
+<html>
 <head>
-<title>Stopwatch</title>
-<script type="text/javascript">
-  //var countTarget = Number(prompt("How many seconds to count up to / down from?", "Type seconds here"));
-  //Either use this or input field
-  //if (countTarget < 0)
-  //{
-  //  alert("Please use a positive integer.")
-  //}
-  var countTarget;
-  var currentSeconds = 0;
-  var reverseSeconds = 0;
-  var paused0 = false;
-  var paused1 = false;
-
-  function updateTimer(){
-    //Normal Timer
-    if(countTarget == null){
-      return
-    }
-    var currentTime = new Date();
-    if(!paused0){
-      currentSeconds += 1;
-    }
-    if(currentSeconds == countTarget)
-    {
-      currentSeconds = countTarget;
-      document.getElementById("pause0").disabled = true;
-      document.getElementById("reset0").disabled = true;
-    } else if(currentSeconds > countTarget){
-      currentSeconds = countTarget;
-    }
-
-    //Reverse Timer
-    var reverseTime = new Date();
-    if(!paused1){
-      reverseSeconds -= 1;
-    }
-    if(reverseSeconds == 0){
-      reverseSeconds = 0;
-      document.getElementById("pause1").disabled = true;
-      document.getElementById("reset1").disabled = true;
-    } else if(reverseSeconds < 0){
-      reverseSeconds = 0;
-    }
-    displayTimer();
-  }
-
-  function displayTimer(){
-    var currentSecondsDisplay = currentSeconds%60;
-    var currentMinutes = Math.floor(currentSeconds/60)%60;
-    var currentHours = Math.floor(currentSeconds/3600)%24;
-    var currentDays = Math.floor(currentSeconds/86400);
-    var reverseSecondsDisplay = reverseSeconds%60;
-    var reverseMinutes = Math.floor(reverseSeconds/60)%60;
-    var reverseHours = Math.floor(reverseSeconds/3600)%24;
-    var reverseDays = Math.floor(reverseSeconds/86400);
-
-    // Compose the string for display
-    var TimerString = currentDays + " days, " + currentHours + " hours, " + currentMinutes + " minutes, " + currentSecondsDisplay + " seconds";
-    var reverseTimerString = reverseDays + " days, " + reverseHours + " hours, " + reverseMinutes + " minutes, " + reverseSecondsDisplay + " seconds";
-
-    // Update the time display
-    document.getElementById("clock0").firstChild.nodeValue = TimerString;
-    document.getElementById("clock1").firstChild.nodeValue = reverseTimerString;
-  }
-  function pause(pausecase){
-    switch(pausecase){
-      case 0:
-      paused0 = !paused0;
-      if(paused0){
-        document.getElementById("pause0").value= "Start";
-      }
-      else{
-        document.getElementById("pause0").value= "Pause";
-      }
-      break
-      case 1:
-      paused1 = !paused1;
-      if(paused1){
-        document.getElementById("pause1").value= "Start";
-      }
-      else{
-        document.getElementById("pause1").value= "Pause";
-      }
-      break
-    }
-  }
-  function reset(resetcase){
-    var fdcurrentTime = new Date();
-    switch(resetcase){
-      case 0:
-      currentSeconds = 0;
-      break
-      case 1:
-      reverseSeconds = countTarget;
-      break
-      case 2:
-      if(Number(document.getElementById("input").value > 0)){
-        countTarget = Number(document.getElementById("input").value);
-      }
-      else{
-        alert("Please use a positive integer.");
-      }
-      currentSeconds = 0;
-      reverseSeconds = countTarget;
-    }
-  }
-</script>
+  <meta charset="utf-8" />
+  <title>Stopwatch</title>
+</head>
 <body onload="displayTimer(), setInterval('updateTimer()', 1000)">
+  <script src="jquery.min.js"></script>
+  <script src="application.js"></script>
+
   <h1>Input</h1>
   <input id="input" type="text" value="seconds">
   <input id="submit" type ="submit" value="Submit" onClick="reset(2)">
@@ -127,6 +26,6 @@
   <div>
     <input id="pause1" type="button" value="Pause" onClick="pause(1)">
     <input id="reset1" type="button" value="Reset" onClick="reset(1)">
+  </div>
 </body>
-</head>
 </html>
