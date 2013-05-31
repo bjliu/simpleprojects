@@ -49,8 +49,8 @@ function displayTimer(){
     var reverseTimerString = reverseDays + " days, " + reverseHours + " hours, " + reverseMinutes + " minutes, " + reverseSecondsDisplay + " seconds";
 
     // Update the time display
-    $("clock0").text(TimerString);
-    $("clock1").text(reverseTimerString);
+    $("#clock0").text(TimerString);
+    $("#clock1").text(reverseTimerString);
 }
 
 var countTarget;
@@ -76,41 +76,37 @@ $(document).ready(function() {
     });
 
     //Clicking on Reset
-    $("p").on("click", "#reset",
-        { str: $(this).closest("h2").text() },
-        function(event) {
+    $("p").on("click", "#reset", function(event) {
         var currentTime = new Date();
-        switch(event.data.str){
-          case "Normal Timer":
+        switch($(this).closest("li").attr("id")){
+          case "normal":
           currentSeconds = 0;
           break
-          case "Reverse Timer":
+          case "reverse":
           reverseSeconds = countTarget;
           break
         }
     });
 
     //Clicking on Pause
-    $("p").on("click", "#pause", 
-        { str: $(this).closest("h2").text() },
-        function(event) {
-        switch(pausecase){
-            case "Normal Timer":
+    $("p").on("click", "#pause", function(event) {
+        switch($(this).closest("li").attr("id")){
+            case "normal":
             paused0 = !paused0;
             if(paused0){
-                $("#normal").("pause").attr("value", "Start");
+                $("#normal").find("#pause").attr("value", "Start");
             }
             else{
-               $("#normal").("pause").attr("value", "Pause");
+               $("#normal").find("#pause").attr("value", "Pause");
             }
             break
-            case "Reverse Timer":
+            case "reverse":
             paused1 = !paused1;
             if(paused1){
-                $("#reverse").("pause").attr("value", "Start");
+                $("#reverse").find("#pause").attr("value", "Start");
             }
             else{
-                $("#reverse").("pause").attr("value", "Pause");
+                $("#reverse").find("#pause").attr("value", "Pause");
             }
             break
         }
