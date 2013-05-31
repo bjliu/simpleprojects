@@ -3,29 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <title>Stopwatch</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body onload="displayTimer(), setInterval('updateTimer()', 1000)">
+<body>
   <script src="jquery.min.js"></script>
   <script src="application.js"></script>
 
   <h1>Input</h1>
   <input id="input" type="text" value="seconds">
-  <input id="submit" type ="submit" value="Submit" onClick="reset(2)">
-  <h1>Normal Timer</h1>
-  <div>
-    <span id="clock0">&nbsp;</span>
-  </div>
-  <div>
-    <input id="pause0" type="button" value="Pause" onClick="pause(0)">
-    <input id="reset0" type="button" value="Reset" onClick="reset(0)">
-  </div>
-  <h1>Reverse Timer</h1>
-  <div>
-    <span id="clock1">&nbsp;</span>
-  </div>
-  <div>
-    <input id="pause1" type="button" value="Pause" onClick="pause(1)">
-    <input id="reset1" type="button" value="Reset" onClick="reset(1)">
-  </div>
+  <input id="submit" type ="submit" value="Submit">
+  <ul>
+    <li id="normal">
+      <h2>Normal Timer</h2>
+      <span id="clock0">&nbsp;</span>
+      <p>
+        <input id="pause" type="button" value="Pause">
+        <input id="reset" type="button" value="Reset">
+      </p>
+    </li>
+    <li id="reverse">
+      <h2>Reverse Timer</h2>
+      <span id="clock1">&nbsp;</span>
+      <p>
+        <input id="pause" type="button" value="Pause">
+        <input id="reset" type="button" value="Reset">
+      </p>
+    </li>
+  </ul>
 </body>
 </html>
